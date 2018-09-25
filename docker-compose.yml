@@ -1,0 +1,20 @@
+version: "3"
+services:
+  paper-service:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "9000:8081/tcp"
+    depends_on:
+      - mongodb
+    environment:
+      - DBHOST=mongodb
+      - PORT=8081
+  mongodb:
+    image: "bitnami/mongodb:latest"
+    volumes:
+            - /home/workspace/research-explorer/mongodata:/bitnami
+    ports:
+      - "27017:27017/tcp"
+    
